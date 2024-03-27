@@ -1,0 +1,19 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-lg bg-warning active">
+                    <input type="radio" name="options" id="option_b1" autocomplete="off" (click)="filterNotify.emit('All')" checked> All
+                </label>
+                <label class="btn btn-lg bg-warning">
+                    <input type="radio" name="options" id="option_b2" autocomplete="off" (click)="filterNotify.emit('My')"> My Involved
+                </label>
+                <label class="btn btn-lg bg-warning">
+                    <input type="radio" name="options" id="option_b2" autocomplete="off" (click)="filterNotify.emit('Ended')"> Ended
+                </label>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->

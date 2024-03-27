@@ -1,0 +1,100 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <app-bwic-list-filter (filterNotify)="setBwicList($event)"></app-bwic-list-filter>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">BWIC Publish List</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Cusip</th>
+                                        <th>Due Date</th>
+                                        <th>Position</th>
+                                        <th>Market Price($)</th>
+                                        <th>Starting Market Value($)</th>
+                                        <th>NO. of Bids</th>
+                                        <th>My Ranking</th>
+                                        <th>My Bid Market Value($)</th>
+                                        <th style="width: 260px">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let bwic of bwicList; let i = index">
+                                    <tr>
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ bwic.cusip }}</td>
+                                        <td>{{ bwic.dueDate }}</td>
+                                        <td>{{ bwic.position }}</td>
+                                        <td>{{ bwic.price }}</td>
+                                        <td>{{ bwic.marketValue }}</td>
+                                        <td *ngIf="bwic.totalBids">{{ bwic.totalBids }}</td>
+                                        <td *ngIf="!bwic.totalBids">-</td>
+                                        <td *ngIf="bwic.bidRank">{{ bwic.bidRank }}</td>
+                                        <td *ngIf="!bwic.bidRank">-</td>
+                                        <td *ngIf="bwic.bidMarketValue">{{ bwic.bidMarketValue }}</td>
+                                        <td *ngIf="!bwic.bidMarketValue">-</td>
+                                        <td>
+                                            <!--Update Link-->
+                                            <span *ngIf="!bwic.overDue && bwic.bidMarketValue">
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-update" (click)="setCurrentBwic(bwic.bwicId)">Update</a>&nbsp;
+                                            </span>
+                                            <!--Cancel Link-->
+                                            <span *ngIf="!bwic.overDue && bwic.bidMarketValue">
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-cancel" (click)="setCurrentBwic(bwic.bwicId)">Cancel</a>&nbsp;
+                                            </span>
+                                            <!--Bid Link-->
+                                            <span *ngIf="!bwic.overDue && !bwic.bidMarketValue">
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-add" (click)="setCurrentBwic(bwic.bwicId)">Bid</a>&nbsp;
+                                            </span>
+                                            <!--View bids Link-->
+                                            <span *ngIf="!bwic.overDue && bwic.totalBids > 0">
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-viewBid">View Bids</a>&nbsp;
+                                            </span>
+                                            <!--Winner label-->
+                                            <span *ngIf="bwic.overDue && bwic.winner" class="badge bg-success">&nbsp;Winner: {{ bwic.winner }}&nbsp;</span>
+                                            <span *ngIf="bwic.overDue && !bwic.winner" class="badge bg-danger">&nbsp;No Winner&nbsp;</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="bwicList.length === 0">
+                                    <tr>
+                                        <td colspan="10">There's no BWIC Records currently ~</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        <!-- <div class="card-footer clearfix">
+                            <ul class="pagination pagination-sm m-0 float-right">
+                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- <router-outlet></router-outlet> -->
+<app-bwic-bid-add [currentBwicInput]="currentBwic" (addBwidBidNotify)="addBwicBid($event)"></app-bwic-bid-add>
+<app-bwic-bid-view></app-bwic-bid-view>
+<app-bwic-bid-update [currentBwicInput]="currentBwic" (updateBwicBidNotify)="updateBwicBid($event)"></app-bwic-bid-update>
+<app-bwic-bid-cancel [currentBwicIdInput]="currentBwic.bwicId" (cancelBwicBidNotify)="cancelBwicBid()"></app-bwic-bid-cancel>
