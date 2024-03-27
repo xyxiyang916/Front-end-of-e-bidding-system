@@ -2,6 +2,7 @@ const domainUri = 'http://localhost:5000';
 
 export const Constants = {
     apiConfig: {
+        "registerUri": domainUri + '/client/register/',
         "loginUri": domainUri + '/client/login/{var1}',
         "allBwicListUri": domainUri + '/bwic/list/{var1}',
         "myInvolvedBwicListUri": domainUri + '/bwic/mylist/{var1}',

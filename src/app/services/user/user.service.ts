@@ -10,9 +10,23 @@ import { Constants } from 'src/app/consts/constants';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-
+  //返回Observable<UserInfoResponse>
   public getUserInfo(username: string, password: string): Observable<UserInfoResponse> {
     return this.http.get<UserInfoResponse>(Constants.apiConfig.loginUri.replace('{var1}', username)).pipe(
+      map(response => {
+        if(response.code === 0 || response.code === 0 || -101) {
+          return response;
+        } else {
+          throw new Error('Get UserInfo error');
+        }
+      }),
+      catchError(error => {
+        throw new Error('Get UserInfo error');
+      })
+    );
+  }
+  public postUserInfo(username: string, password: string): Observable<any> {
+    return this.http.post<any>(Constants.apiConfig.registerUri, { username, password }).pipe(
       map(response => {
         if(response.code === 0 || response.code === 0 || -101) {
           return response;

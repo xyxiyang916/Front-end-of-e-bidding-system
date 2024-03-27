@@ -17,6 +17,7 @@ import { BwicBidViewComponent } from './bwic-bid-view/bwic-bid-view.component';
 import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     BwicBidCancelComponent,
     BwicBidViewComponent,
     ErrorComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

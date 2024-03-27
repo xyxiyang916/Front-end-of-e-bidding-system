@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BwicListComponent } from './bwic-list/bwic-list.component';
 import { ErrorComponent } from './error/error.component';
+import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MainFrameComponent } from './main-frame/main-frame.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -9,6 +10,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, title: 'eBidding | Log in' },
+  { path: 'register', component: RegisterComponent, title: 'eBidding | register' },
   {
     path: 'dashboard',
     component: MainFrameComponent,
