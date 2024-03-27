@@ -35,16 +35,18 @@ export class LoginComponent {
       this.userService.clearUserFromLocalStorage();
       //请求后台获取登录user数据
       this.userService.getUserInfo(username, password).subscribe(userInfoResponse => {
-        if (userInfoResponse.code === -101) {
-          //显示错误提示框
-          toastr.error('该用户不存在，请更换用户名重新登陆。');
-        } else {
-          //将获取到的user数据添加到localStorage里面
-          this.userService.addUserToLocalStorage(userInfoResponse.data);
-          //this.message.createBasicMessage;
-          //跳转到dashboard
-          this.route.navigate(['/dashboard']);
-        }
+        if (userInfoResponse.code === 0) {
+          //if (userInfoResponse.code === -101) {
+            //将获取到的user数据添加到localStorage里面
+            this.userService.addUserToLocalStorage(userInfoResponse.data);
+            toastr.success('Welcome to e Bidding System!', 'Success!');
+            //跳转到dashboard
+            this.route.navigate(['/dashboard']);
+          } else {
+            // 根据不同状态码输出内容
+  
+            toastr.error('登陆失败');
+          }
       });
     } else {
       // window.alert('User: ' + username + " doesn't exist!");

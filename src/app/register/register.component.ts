@@ -35,10 +35,11 @@ export class RegisterComponent {
       this.userService.postUserInfo(username, password).subscribe(userInfoResponse => {
         if (userInfoResponse.code === -101) {
           //显示错误提示框
-          toastr.error('该用户不存在，请更换用户名重新登陆。');
+          toastr.error('注册失败');
         } else {
           //将获取到的user数据添加到localStorage里面
           this.userService.addUserToLocalStorage(userInfoResponse.data);
+          toastr.error('注册成功');
           //跳转到dashboard
           this.route.navigate(['/dashboard']);
         }
