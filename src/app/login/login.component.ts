@@ -27,10 +27,13 @@ export class LoginComponent {
 
   // 获取表单中的用户名和密码，并通过 UserService 发起登录请求
   onSubmit(): void {
+    if(this.loginForm.invalid) {
+      return;
+    }
     const username = this.loginForm.controls['username'].value;
     const password = this.loginForm.controls['password'].value;
     // window.alert('username:' + username + ' password:' + password);
-    if(username?.trim() && password?.trim()) {
+    if(username?.trim() && password?.trim() && password.length>5) {
       //先清空localStorage里面的user缓存
       this.userService.clearUserFromLocalStorage();
       //请求后台获取登录user数据
