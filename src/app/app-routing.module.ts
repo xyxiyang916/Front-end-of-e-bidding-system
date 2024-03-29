@@ -6,9 +6,11 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MainFrameComponent } from './main-frame/main-frame.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomePageComponent, title: 'eBidding system' },
   { path: 'login', component: LoginComponent, title: 'eBidding | Log in' },
   { path: 'register', component: RegisterComponent, title: 'eBidding | register' },
   {

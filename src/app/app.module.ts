@@ -18,6 +18,7 @@ import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RegisterComponent } from './register/register.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RegisterComponent } from './register/register.component';
     BwicBidViewComponent,
     ErrorComponent,
     WelcomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
