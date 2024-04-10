@@ -1,3 +1,4 @@
+import { BwicListFilterComponent } from './../bwic-list-filter/bwic-list-filter.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BwicInfo } from '../models/bwic';
@@ -18,9 +19,10 @@ export class BwicListComponent {
   // 获取用户信息
   private userId = this.userService.getLoggedUser().id;
   currentFilterType: string = 'All';
-  length = 0;
   page: number[] = [];
   pageNum = 0;
+  // 搜索内容
+  searchText: string = '';
 
   constructor(
     private bwicService: BwicService,
@@ -37,6 +39,10 @@ export class BwicListComponent {
       // 否则要求登录
       this.route.navigate(['/login']);
     }
+  }
+  // 通过双向绑定获取搜索内容
+  search(): void {
+    this.setBwicList(this.currentFilterType, this.searchText)
   }
 
   creatPagination(num: number = 0): void {
@@ -55,18 +61,26 @@ export class BwicListComponent {
     this.setBwicList(this.currentFilterType)
   }
 
-  setBwicList(filterType: string = 'All'): void {
+  setBwicList(filterType: string = 'All', text: string = ''): void {
     // 用户选择ended
     if (filterType === 'Ended') {
       // 获取当前结束的
       // 先获取所有的再筛选
       this.bwicService.getBwicList(this.userId).subscribe(bwicListFromResponse => {
+        // 根据搜索内容进行筛选
+        if (this.searchText !== '') {
+          bwicListFromResponse = bwicListFromResponse.filter(item => item.cusip.includes(this.searchText));
+        }
         this.bwicList = bwicListFromResponse.filter(bwic => bwic.overDue).slice(10 * this.pageNum, 10 * (this.pageNum + 1));
         this.creatPagination(bwicListFromResponse.filter(bwic => bwic.overDue).length);
       });
       // 根据类型获取所有或者我的所有
     } else {
       this.bwicService.getBwicList(this.userId, filterType).subscribe(bwicListFromResponse => {
+        // 根据搜索内容进行筛选
+        if (this.searchText !== '') {
+          bwicListFromResponse = bwicListFromResponse.filter(item => item.cusip.includes(this.searchText));
+        }
         this.bwicList = bwicListFromResponse.slice(10 * this.pageNum, 10 * (this.pageNum + 1));
         this.creatPagination(bwicListFromResponse.length);
       });
