@@ -1508,5 +1508,19 @@ $.validator.addMethod( "zipcodeUS", function( value, element ) {
 $.validator.addMethod( "ziprange", function( value, element ) {
 	return this.optional( element ) || /^90[2-5]\d\{2\}-\d{4}$/.test( value );
 }, "Your ZIP-code must be in the range 902xx-xxxx to 905xx-xxxx" );
+
+$.validator.addMethod(
+	//规则名称
+	"customPassword",
+	function(value, element) {
+        return this.optional(element) || /[a-zA-Z]+/.test(value) && /[0-9]+/.test(value);
+    });
+$.validator.addMethod(
+	//规则名称
+	"rightNumber",
+	function(value, element) {
+		return this.optional(element) || /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value);
+	});
+
 return $;
 }));

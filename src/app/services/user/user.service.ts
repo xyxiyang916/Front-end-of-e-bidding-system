@@ -25,10 +25,10 @@ export class UserService {
       })
     );
   }
-  public postUserInfo(username: string, password: string): Observable<any> {
-    return this.http.post<any>(Constants.apiConfig.registerUri, { username, password }).pipe(
+  public postUserInfo(number: string, password: string): Observable<any> {
+    return this.http.post<any>(Constants.apiConfig.registerUri, { number, password }).pipe(
       map(response => {
-        if(response.code === 0 || response.code === 0 || -101) {
+        if(response.code === 0 || response.code === 1 || response.code === -101) {
           return response;
         } else {
           throw new Error('Get UserInfo error');

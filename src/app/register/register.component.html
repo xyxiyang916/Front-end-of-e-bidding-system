@@ -9,18 +9,22 @@
 
             <form id="formValid" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
+                    <label for="number">Number</label>
+                    <input type="text" formControlName="number" class="form-control" id="number" name="number" placeholder="Enter Number">
+                </div>
+                <!--div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" formControlName="username" class="form-control" id="username" name="username" placeholder="Enter Username">
-                </div>
+                </div-->
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" formControlName="password" class="form-control" id="password" name="password"
-                        placeholder="Password, minmun 6 characters">
+                        placeholder="Password, minmun 8 characters">
                 </div>
                 <div class="form-group">
                     <label for="confirm_password">confirm password</label>
                     <input type="password" formControlName="confirm_password" class="form-control" id="confirm_password" name="confirm_password"
-                        placeholder="confirm_password, minmun 6 characters">
+                        placeholder="confirm_password, minmun 8 characters">
                 </div>
                 <div class="row">
                     <div class="col-12"></div>

@@ -1,84 +1,101 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>e Bidding System</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="/assets/dist/css/google.font.css">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="/assets/plugins/toastr/toastr.min.css">
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>e Bidding System</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="/assets/dist/css/google.font.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="/assets/plugins/toastr/toastr.min.css">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body class="sidebar-mini sidebar-closed sidebar-collapse" style="height: auto;">
 
-  <app-root></app-root>
+    <app-root></app-root>
 
-  <!-- jQuery -->
-  <script src="/assets/plugins/jquery/jquery.min.js"></script>
-  <!-- jquery-validation -->
-  <script src="/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE -->
-  <script src="/assets/dist/js/adminlte.min.js"></script>
-  <!-- Toastr -->
-  <script src="/assets/plugins/toastr/toastr.min.js"></script>
+    <!-- jQuery -->
+    <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="/assets/plugins/jquery-validation/additional-methods.js"></script>
+    <!-- Bootstrap -->
+    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="/assets/dist/js/adminlte.min.js"></script>
+    <!-- Toastr -->
+    <script src="/assets/plugins/toastr/toastr.min.js"></script>
 
-  <script>
-      $(function () {
-          $.validator.setDefaults({
-              submitHandler: function () {
-                //   window.location.href = '/';
-              }
-          });
-          $('#formValid').validate({
-              rules: {
-                  username: {
-                      required: true
-                  },
-                  password: {
-                      required: true,
-                      minlength: 6
-                  },
-                  confirm_password: {
-                    required: true,
-                    equalTo: "#password"
+    <script>
+        $(function () {
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    //   window.location.href = '/';
+                }
+            });
+
+            $('#formValid').validate({
+                rules: {
+                    number: {
+                        required: true,
+                        minlength: 11,
+                        rightNumber: true
+                    },
+                    username: {
+                        required: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8,
+                        customPassword: true
+                    },
+                    confirm_password: {
+                        required: true,
+                        equalTo: "#password"
                     }
-              },
-              messages: {
-                  username: {
-                      required: "Please enter Username"
-                  },
-                  password: {
-                      required: "Please provide a password",
-                      minlength: "Your password must be at least 6 characters long"
-                  },
-                  confirm_password: {
-                    required: "Please enter your password again",
-                    equalTo: "Two passwords do not match"
+                },
+                messages: {
+                    number: {
+                        required: "Please enter Number",
+                        rightNumber: "Please enter the correct number"
+                    },
+                    username: {
+                        required: "Please enter Username"
+                    },
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 8 characters long",
+                        customPassword: "The password must have at least one number or letter"
+                    },
+                    confirm_password: {
+                        required: "Please enter your password again",
+                        equalTo: "Two passwords do not match"
                     }
-              },
-              errorElement: 'span',
-              errorPlacement: function (error, element) {
-                  error.addClass('invalid-feedback');
-                  element.closest('.form-group').append(error);
-              },
-              highlight: function (element, errorClass, validClass) {
-                  $(element).addClass('is-invalid');
-              },
-              unhighlight: function (element, errorClass, validClass) {
-                  $(element).removeClass('is-invalid');
-              }
-          });
-      });
-  </script>
+                },
+
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
