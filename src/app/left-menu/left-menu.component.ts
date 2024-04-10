@@ -11,11 +11,13 @@ export class LeftMenuComponent {
 
   userInfo?: UserInfo;
   currentMenu: string = 'welcome';
+  userGroup: number = 1;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.userInfo = this.userService.getLoggedUser();
+    this.userGroup = this.userInfo.id
   }
 
   updateMenuStatus(menuName: string): void {

@@ -28,3 +28,13 @@ export class CancelBwicBidRequest {
     bwicId = 0;
     clientId = 0;
 }
+
+export class ModifyBwicBidRequest {
+    bwicId = 0;
+    cusip = '';
+    position = 0;
+    price = 0;
+    dueDate = new Date();
+    marketValue = 0;
+    overDue = true;
+}

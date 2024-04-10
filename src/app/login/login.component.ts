@@ -35,7 +35,7 @@ export class LoginComponent {
     const password = this.loginForm.controls['password'].value;
     const type = this.loginForm.controls['type'].value;
     // window.alert('username:' + username + ' password:' + password);
-    if (username?.trim() && password?.trim() && password.length > 5 && type==='1') {
+    if (username?.trim() && password?.trim() && password.length > 7) {
       //先清空localStorage里面的user缓存
       this.userService.clearUserFromLocalStorage();
       //请求后台获取登录user数据

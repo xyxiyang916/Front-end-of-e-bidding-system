@@ -1,4 +1,3 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <app-bwic-list-filter (filterNotify)="setBwicList($event)"></app-bwic-list-filter>
 
@@ -54,10 +53,10 @@
                                         <td *ngIf="bwic.bidMarketValue">{{ bwic.bidMarketValue }}</td>
                                         <td *ngIf="!bwic.bidMarketValue">-</td>
                                         <td>
-                                            <!--Update Link-->
+                                            <!--modify Link-->
                                             <span *ngIf="!bwic.overDue && bwic.bidMarketValue">
-                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-update"
-                                                    (click)="setCurrentBwic(bwic.bwicId)">Update</a>&nbsp;
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-modify"
+                                                    (click)="setCurrentBwic(bwic.bwicId)">modify</a>&nbsp;
                                             </span>
                                             <!--Cancel Link-->
                                             <span *ngIf="!bwic.overDue && bwic.bidMarketValue">
@@ -110,13 +109,12 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
 
 <!-- <router-outlet></router-outlet> -->
-<app-bwic-bid-add [currentBwicInput]="currentBwic" (addBwidBidNotify)="addBwicBid($event)"></app-bwic-bid-add>
 <app-bwic-bid-view></app-bwic-bid-view>
-<app-bwic-bid-update [currentBwicInput]="currentBwic"
-    (updateBwicBidNotify)="updateBwicBid($event)"></app-bwic-bid-update>
+<app-bwic-bid-modify [currentBwicInput]="currentBwic"
+    (modifyBwicBidNotify)="modifyBwicBid($event)"></app-bwic-bid-modify>
 <app-bwic-bid-cancel [currentBwicIdInput]="currentBwic.bwicId"
     (cancelBwicBidNotify)="cancelBwicBid()"></app-bwic-bid-cancel>
+</div>

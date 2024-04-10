@@ -19,6 +19,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { UserpageComponent } from './userpage/userpage.component';
+import { MarketSituationComponent } from './market-situation/market-situation.component';
+import { TestComponent } from './test/test.component';
+import { ManageComponent } from './manage/manage.component';
+import { BwicBidModifyComponent } from './bwic-bid-modify/bwic-bid-modify.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,12 @@ import { HomePageComponent } from './home-page/home-page.component';
     ErrorComponent,
     WelcomeComponent,
     RegisterComponent,
-    HomePageComponent
+    HomePageComponent,
+    UserpageComponent,
+    MarketSituationComponent,
+    TestComponent,
+    ManageComponent,
+    BwicBidModifyComponent
   ],
   imports: [
     BrowserModule,

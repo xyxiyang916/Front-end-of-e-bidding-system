@@ -7,6 +7,7 @@ export const Constants = {
         "allBwicListUri": domainUri + '/bwic/list/{var1}',
         "myInvolvedBwicListUri": domainUri + '/bwic/mylist/{var1}',
         "updateBwicUri": domainUri + '/bwic/bid',
-        "cancelBwicUri": domainUri + '/bwic/cancel'
+        "cancelBwicUri": domainUri + '/bwic/cancel',
+        "modifyBwicUri": domainUri + '/bwic/modify'
     }
 }
