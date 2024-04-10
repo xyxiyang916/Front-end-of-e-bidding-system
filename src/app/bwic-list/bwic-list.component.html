@@ -1,5 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper" onload="func1();">
     <app-bwic-list-filter (filterNotify)="setBwicList($event)"></app-bwic-list-filter>
 
     <!-- Main content -->
@@ -30,7 +30,7 @@
                                 </thead>
                                 <tbody *ngFor="let bwic of bwicList; let i = index">
                                     <tr>
-                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ (pageNum)*10+i + 1 }}</td>
                                         <td>{{ bwic.cusip }}</td>
                                         <td>{{ bwic.dueDate }}</td>
                                         <td>{{ bwic.position }}</td>
@@ -45,23 +45,29 @@
                                         <td>
                                             <!--Update Link-->
                                             <span *ngIf="!bwic.overDue && bwic.bidMarketValue">
-                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-update" (click)="setCurrentBwic(bwic.bwicId)">Update</a>&nbsp;
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-update"
+                                                    (click)="setCurrentBwic(bwic.bwicId)">Update</a>&nbsp;
                                             </span>
                                             <!--Cancel Link-->
                                             <span *ngIf="!bwic.overDue && bwic.bidMarketValue">
-                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-cancel" (click)="setCurrentBwic(bwic.bwicId)">Cancel</a>&nbsp;
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-cancel"
+                                                    (click)="setCurrentBwic(bwic.bwicId)">Cancel</a>&nbsp;
                                             </span>
                                             <!--Bid Link-->
                                             <span *ngIf="!bwic.overDue && !bwic.bidMarketValue">
-                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-add" (click)="setCurrentBwic(bwic.bwicId)">Bid</a>&nbsp;
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-add"
+                                                    (click)="setCurrentBwic(bwic.bwicId)">Bid</a>&nbsp;
                                             </span>
                                             <!--View bids Link-->
                                             <span *ngIf="!bwic.overDue && bwic.totalBids > 0">
-                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-viewBid">View Bids</a>&nbsp;
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-viewBid">View
+                                                    Bids</a>&nbsp;
                                             </span>
                                             <!--Winner label-->
-                                            <span *ngIf="bwic.overDue && bwic.winner" class="badge bg-success">&nbsp;Winner: {{ bwic.winner }}&nbsp;</span>
-                                            <span *ngIf="bwic.overDue && !bwic.winner" class="badge bg-danger">&nbsp;No Winner&nbsp;</span>
+                                            <span *ngIf="bwic.overDue && bwic.winner"
+                                                class="badge bg-success">&nbsp;Winner: {{ bwic.winner }}&nbsp;</span>
+                                            <span *ngIf="bwic.overDue && !bwic.winner" class="badge bg-danger">&nbsp;No
+                                                Winner&nbsp;</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -73,15 +79,18 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
-                        <!-- <div class="card-footer clearfix">
+                        <div class="card-footer clearfix">
                             <ul class="pagination pagination-sm m-0 float-right">
                                 <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <tbody *ngFor="let p of page; let i = index">
+                                    <tr>
+                                        <li class="page-item"><a class="page-link" data-toggle="modal" href=""
+                                                (click)="changePage(p)">{{p}}</a></li>
+                                    </tr>
+                                </tbody>
                                 <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
                             </ul>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,5 +105,7 @@
 <!-- <router-outlet></router-outlet> -->
 <app-bwic-bid-add [currentBwicInput]="currentBwic" (addBwidBidNotify)="addBwicBid($event)"></app-bwic-bid-add>
 <app-bwic-bid-view></app-bwic-bid-view>
-<app-bwic-bid-update [currentBwicInput]="currentBwic" (updateBwicBidNotify)="updateBwicBid($event)"></app-bwic-bid-update>
-<app-bwic-bid-cancel [currentBwicIdInput]="currentBwic.bwicId" (cancelBwicBidNotify)="cancelBwicBid()"></app-bwic-bid-cancel>
+<app-bwic-bid-update [currentBwicInput]="currentBwic"
+    (updateBwicBidNotify)="updateBwicBid($event)"></app-bwic-bid-update>
+<app-bwic-bid-cancel [currentBwicIdInput]="currentBwic.bwicId"
+    (cancelBwicBidNotify)="cancelBwicBid()"></app-bwic-bid-cancel>

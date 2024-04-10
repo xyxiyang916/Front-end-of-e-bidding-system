@@ -23,8 +23,10 @@ export class BwicService {
   public getBwicList(userId: number, filterType: string = 'All'): Observable<BwicInfo[]> {
     let uri: string = '';
     if (filterType === 'All') {
+      // 获取所有
       uri = Constants.apiConfig.allBwicListUri.replace('{var1}', userId+'')
     } else if (filterType === 'My') {
+      // 获取我的所有
       uri = Constants.apiConfig.myInvolvedBwicListUri.replace('{var1}', userId+'')
     }
     

@@ -12,11 +12,11 @@ export class BwicBidAddComponent {
   @Output() addBwidBidNotify = new EventEmitter<BwicInfo>();
 
   bwicFormData: BwicInfo = new BwicInfo();
-
+  // 生命周期钩子函数，在输入属性发生变化时执行，currentBwicInput 的值复制到 bwicFormData
   ngOnChanges(): void {
     Object.assign(this.bwicFormData, this.currentBwicInput)
   }
-
+  // 将 bwicFormData 的值通过 addBwidBidNotify 输出属性发送出去
   addBwicBid(): void {
     this.addBwidBidNotify.emit(this.bwicFormData);
   }

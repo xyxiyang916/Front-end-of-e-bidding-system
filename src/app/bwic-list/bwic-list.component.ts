@@ -15,8 +15,12 @@ export class BwicListComponent {
 
   bwicList: BwicInfo[] = [];
   currentBwic: BwicInfo = new BwicInfo();
+  // 获取用户信息
   private userId = this.userService.getLoggedUser().id;
   currentFilterType: string = 'All';
+  length = 0;
+  page: number[] = [];
+  pageNum = 0;
 
   constructor(
     private bwicService: BwicService,
@@ -25,21 +29,46 @@ export class BwicListComponent {
   ) { }
 
   ngOnInit(): void {
+    // 有登录用户
     if (this.userId) {
+      this.page = [];
       this.setBwicList();
     } else {
-      this.route.navigate(['/']);
+      // 否则要求登录
+      this.route.navigate(['/login']);
     }
   }
 
+  creatPagination(num: number = 0): void {
+    this.page = []
+    num = num / 10;
+    if (num.toString().indexOf('.') != -1) {
+      num += 1;
+    }
+    for (let i = 1; i < num; i++) {
+      this.page.push(i);
+    }
+  }
+
+  changePage(num: number = 0): void {
+    this.pageNum = num - 1;
+    this.setBwicList(this.currentFilterType)
+  }
+
   setBwicList(filterType: string = 'All'): void {
-    if(filterType === 'Ended') {
+    // 用户选择ended
+    if (filterType === 'Ended') {
+      // 获取当前结束的
+      // 先获取所有的再筛选
       this.bwicService.getBwicList(this.userId).subscribe(bwicListFromResponse => {
-        this.bwicList = bwicListFromResponse.filter(bwic => bwic.overDue);
+        this.bwicList = bwicListFromResponse.filter(bwic => bwic.overDue).slice(10 * this.pageNum, 10 * (this.pageNum + 1));
+        this.creatPagination(bwicListFromResponse.filter(bwic => bwic.overDue).length);
       });
+      // 根据类型获取所有或者我的所有
     } else {
       this.bwicService.getBwicList(this.userId, filterType).subscribe(bwicListFromResponse => {
-        this.bwicList = bwicListFromResponse;
+        this.bwicList = bwicListFromResponse.slice(10 * this.pageNum, 10 * (this.pageNum + 1));
+        this.creatPagination(bwicListFromResponse.length);
       });
     }
     this.currentFilterType = filterType;
