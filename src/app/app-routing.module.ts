@@ -11,6 +11,7 @@ import { UserpageComponent } from './userpage/userpage.component';
 import { MarketSituationComponent } from './market-situation/market-situation.component';
 import { TestComponent } from './test/test.component';
 import { ManageComponent } from './manage/manage.component';
+import { ForgetComponent } from './forget/forget.component';
 
 const routes: Routes = [
   { path: 'test', component: TestComponent, title: 'test' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'profile', component: UserpageComponent, title: 'your home' },
   { path: 'login', component: LoginComponent, title: 'eBidding | Log in' },
   { path: 'register', component: RegisterComponent, title: 'eBidding | register' },
+  { path: 'forget', component: ForgetComponent, title: 'eBidding | forget' },
   {
     path: 'dashboard',
     component: MainFrameComponent,

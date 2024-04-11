@@ -1,7 +1,7 @@
 export interface UserInfo {
     id: number,
     name: string,
-    assetValue?: number
+    assetValue: number
 }
 
 export interface UserInfoResponse {

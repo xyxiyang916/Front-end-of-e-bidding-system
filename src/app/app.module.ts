@@ -26,6 +26,7 @@ import { ManageComponent } from './manage/manage.component';
 import { BwicBidModifyComponent } from './bwic-bid-modify/bwic-bid-modify.component';
 import { BwicBidDeleteComponent } from './bwic-bid-delete/bwic-bid-delete.component';
 import { BwicBidCreateComponent } from './bwic-bid-create/bwic-bid-create.component';
+import { ForgetComponent } from './forget/forget.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { BwicBidCreateComponent } from './bwic-bid-create/bwic-bid-create.compon
     ManageComponent,
     BwicBidModifyComponent,
     BwicBidDeleteComponent,
-    BwicBidCreateComponent
+    BwicBidCreateComponent,
+    ForgetComponent
   ],
   imports: [
     BrowserModule,

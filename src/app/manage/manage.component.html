@@ -92,14 +92,14 @@
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
                                 <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <tbody *ngFor="let p of page; let i = index">
-                                        <tr>
-                                            <li class="page-item"><a class="page-link" data-toggle="modal" href=""
-                                                    (click)="changePage(p)">{{p}}</a></li>
-                                        </tr>
-                                    </tbody>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                    <li class="page-item"><a class="page-link" href="" data-toggle="modal" (click)="changePage(page[0])">&laquo;</a></li>
+                                <tbody *ngFor="let p of page; let i = index">
+                                    <tr>
+                                        <li class="page-item"><a class="page-link" data-toggle="modal" href=""
+                                                (click)="changePage(p)">{{p}}</a></li>
+                                    </tr>
+                                </tbody>
+                                <li class="page-item"><a class="page-link" href="" data-toggle="modal" (click)="changePage(page[page.length-1])">&raquo;</a></li>
                                 </ul>
                             </div>
                         </div>

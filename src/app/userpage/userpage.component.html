@@ -1,0 +1,95 @@
+<div class="login-page">
+    <!-- /.login-logo -->
+    <div class="card card-primary">
+        <div class="card-body box-profile">
+            <div class="text-center">
+                <img class="profile-user-img img-fluid img-circle" src="..\..\assets\dist\img\avatar.png"
+                    alt="User profile picture">
+            </div>
+            <h3 class="profile-username text-center">{{username}}</h3>
+            <p class="text-muted text-center">{{userGroup}}</p>
+            <ul class="list-group list-group-unbordered mb-3">
+                <li class="list-group-item">
+                    <b>Cusip number</b> <a class="float-right">{{cusipNum}}</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Your wallet</b> <a class="float-right">{{money}}</a>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="#" class="btn btn-primary btn-block"><b>Change Username</b></a>
+                </div>
+                <div class="col-md-6">
+                    <a href="#" class="btn btn-primary btn-block"><b>Change Password</b></a>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-body table-responsive p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Cusip</th>
+                        <th>Due Date</th>
+                        <th>Position</th>
+                        <th>Market Price($)</th>
+                        <th>Starting Market Value($)</th>
+                        <th>NO. of Bids</th>
+                        <th>My Ranking</th>
+                        <th>My Bid Market Value($)</th>
+                        <th style="width: 260px">State</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let bwic of bwicList; let i = index">
+                    <tr>
+                        <td>{{ 10+i + 1 }}</td>
+                        <td>{{ bwic.cusip }}</td>
+                        <td>{{ bwic.dueDate }}</td>
+                        <td>{{ bwic.position }}</td>
+                        <td>{{ bwic.price }}</td>
+                        <td>{{ bwic.marketValue }}</td>
+                        <td *ngIf="bwic.totalBids">{{ bwic.totalBids }}</td>
+                        <td *ngIf="!bwic.totalBids">-</td>
+                        <td *ngIf="bwic.bidRank">{{ bwic.bidRank }}</td>
+                        <td *ngIf="!bwic.bidRank">-</td>
+                        <td *ngIf="bwic.bidMarketValue">{{ bwic.bidMarketValue }}</td>
+                        <td *ngIf="!bwic.bidMarketValue">-</td>
+                        <td>
+
+                            <!--Winner label-->
+                            <span *ngIf="bwic.overDue && bwic.winner" class="badge bg-success">&nbsp;Winner: {{
+                                bwic.winner }}&nbsp;</span>
+                            <span *ngIf="bwic.overDue && !bwic.winner" class="badge bg-danger">&nbsp;No
+                                Winner&nbsp;</span>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="bwicList.length === 0">
+                    <tr>
+                        <td colspan="10">There's no BWIC Records currently ~</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+            <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item"><a class="page-link" href="" data-toggle="modal"
+                        (click)="changePage(page[0])">&laquo;</a></li>
+                <tbody *ngFor="let p of page; let i = index">
+                    <tr>
+                        <li class="page-item"><a class="page-link" data-toggle="modal" href=""
+                                (click)="changePage(p)">{{p}}</a></li>
+                    </tr>
+                </tbody>
+                <li class="page-item"><a class="page-link" href="" data-toggle="modal"
+                        (click)="changePage(page[page.length-1])">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.card -->
+
+</div>
+<!-- /.login-box -->
