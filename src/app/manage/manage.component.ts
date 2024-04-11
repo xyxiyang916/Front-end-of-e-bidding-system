@@ -109,4 +109,16 @@ export class ManageComponent {
       }
     })
   }
+
+  // create by bid record
+  createBwicBid(createdBwic: BwicInfo): void {
+    this.bwicService.createBwicBid(createdBwic).subscribe(bwicListFromResponse => {
+      //用户余额不够的情况
+      if (bwicListFromResponse.code === -102) {
+        toastr.error('修改失败');
+      } else {
+        this.setBwicList(this.currentFilterType);
+      }
+    })
+  }
 }

@@ -43,3 +43,12 @@ export class DeleteBwicBidRequest {
     bwicId = 0;
     clientId = 0;
 }
+
+export class CreateBwicBidRequest {
+    cusip = '';
+    position = 0;
+    price = 0;
+    dueDate = new Date();
+    marketValue = 0;
+    clientId = 0;
+}

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { Constants } from 'src/app/consts/constants';
-import { BwicInfo, BwicInfoResponse, CancelBwicBidRequest, UpdateBwicBidRequest, ModifyBwicBidRequest, DeleteBwicBidRequest } from 'src/app/models/bwic';
+import { BwicInfo, BwicInfoResponse, CancelBwicBidRequest, UpdateBwicBidRequest, ModifyBwicBidRequest, DeleteBwicBidRequest, CreateBwicBidRequest } from 'src/app/models/bwic';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -131,5 +131,30 @@ export class BwicService {
         throw new Error('delete BWIC error!');
       })
     );
+  }
+
+  //This is used for bwic bid create
+  public createBwicBid(createdBwic: BwicInfo): Observable<BwicInfoResponse>{
+    const createBwicBidRequest: CreateBwicBidRequest = {
+      'clientId': this.userId,
+      'cusip': createdBwic.cusip,
+      'position':createdBwic.position,
+      'price':createdBwic.price,
+      'dueDate':createdBwic.dueDate,
+      'marketValue':createdBwic.marketValue,
+    }
+
+    return this.http.post<BwicInfoResponse>(Constants.apiConfig.createBwicUri, createBwicBidRequest).pipe(
+      map(response => {
+        if(response.code === 0 || response.code === -102) {
+          return response;
+        } else {
+          throw new Error('create BWIC error!');
+        }
+      }),
+      catchError(error => {
+        throw new Error('create BWIC error!');
+      })
+    )
   }
 }

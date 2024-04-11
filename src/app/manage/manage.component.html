@@ -15,12 +15,12 @@
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 200px;">
                                         <div class="input-group-prepend">
-                                            <button type="submit" class="btn btn-primary btn-block">Add</button>
+                                            <button type="submit" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-create">Add</button>
                                         </div>
                                         <input type="text" name="table_search" class="form-control float-right"
                                             placeholder="Search" [(ngModel)]="searchText">
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default" data-toggle="modal" data-target="#modal-modify"(click)="search()">
+                                            <button type="submit" class="btn btn-default" (click)="search()">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
@@ -62,7 +62,7 @@
                                                         (click)="setCurrentBwic(bwic.bwicId)">modify</a>&nbsp;
                                                 </span>
                                                 <!--Cancel Link-->
-                                                <span *ngIf="!bwic.overDue && bwic.bidMarketValue">
+                                                <span *ngIf="!bwic.overDue">
                                                     &nbsp;<a href="" data-toggle="modal" data-target="#modal-delete"
                                                         (click)="setCurrentBwic(bwic.bwicId)">Delete</a>&nbsp;
                                                 </span>
@@ -119,4 +119,6 @@
         (modifyBwicBidNotify)="modifyBwicBid($event)"></app-bwic-bid-modify>
     <app-bwic-bid-delete [currentBwicIdInput]="currentBwic.bwicId"
         (deleteBwicBidNotify)="deleteBwicBid()"></app-bwic-bid-delete>
+    <app-bwic-bid-create
+        (createBwicBidNotify)="createBwicBid($event)"></app-bwic-bid-create>
 </div>

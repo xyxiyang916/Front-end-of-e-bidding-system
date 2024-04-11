@@ -39,7 +39,7 @@ export class LoginComponent {
       //先清空localStorage里面的user缓存
       this.userService.clearUserFromLocalStorage();
       //请求后台获取登录user数据
-      this.userService.getUserInfo(username, password).subscribe(userInfoResponse => {
+      this.userService.login(username, password).subscribe(userInfoResponse => {
         if (userInfoResponse.code === 0) {
           //if (userInfoResponse.code === -101) {
           //将获取到的user数据添加到localStorage里面

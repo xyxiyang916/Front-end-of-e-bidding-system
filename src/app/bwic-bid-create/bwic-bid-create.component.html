@@ -1,0 +1,59 @@
+
+
+<div class="modal fade" id="modal-create">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">create My Bid</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="Cusip" class="col-sm-4 col-form-label">Cusip</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="Cusip" placeholder="" name="cusip" [(ngModel)]="bwicFormData.cusip">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="dueDate" class="col-sm-4 col-form-label">Due Date</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="dueDate" placeholder="" name="dueDate" [ngModel]="bwicFormData.dueDate | date:'yyyy-MM-dd'" (ngModelChange)="onDueDateChange($event)">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="position" class="col-sm-4 col-form-label">Position</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="position" placeholder="" name="position" [(ngModel)]="bwicFormData.position">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="price" class="col-sm-4 col-form-label">Market Price($)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="price" placeholder="" name="price" [(ngModel)]="bwicFormData.price">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="marketValue" class="col-sm-4 col-form-label">Starting Market Value($)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="marketValue"
+                                    placeholder="" name="MarketValue" [(ngModel)]="bwicFormData.marketValue">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createBwicBid()">create</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

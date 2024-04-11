@@ -14,7 +14,7 @@ export class UserService {
   public getUserInfo(username: string, password: string): Observable<UserInfoResponse> {
     return this.http.get<UserInfoResponse>(Constants.apiConfig.loginUri.replace('{var1}', username)).pipe(
       map(response => {
-        if(response.code === 0 || response.code === 0 || -101) {
+        if (response.code === 0 || response.code === 0 || -101) {
           return response;
         } else {
           throw new Error('Get UserInfo error');
@@ -25,10 +25,34 @@ export class UserService {
       })
     );
   }
-  public postUserInfo(number: string, password: string): Observable<any> {
-    return this.http.post<any>(Constants.apiConfig.registerUri, { number, password }).pipe(
+
+  public login(username: string, password: string): Observable<any> {
+    const body={
+      "username":username,
+      "password":password
+    }
+    return this.http.post<any>(Constants.apiConfig.login, body).pipe(
       map(response => {
-        if(response.code === 0 || response.code === 1 || response.code === -101) {
+        if (response.code === 0 || response.code === -101) {
+          return response;
+        } else {
+          throw new Error('Get UserInfo error');
+        }
+      }),
+      catchError(error => {
+        throw new Error('Get UserInfo error');
+      })
+    );
+  }
+
+  public postUserInfo(number: string, password: string): Observable<any> {
+    const body={
+      "number":number,
+      "password":password
+    }
+    return this.http.post<any>(Constants.apiConfig.registerUri, body).pipe(
+      map(response => {
+        if (response.code === 0 || response.code === 1 || response.code === -101) {
           return response;
         } else {
           throw new Error('Get UserInfo error');
@@ -47,7 +71,7 @@ export class UserService {
     window.localStorage.setItem('user_name', userInfo.name);
   }
 
-  public clearUserFromLocalStorage() : void {
+  public clearUserFromLocalStorage(): void {
     window.localStorage.removeItem('user_id');
     window.localStorage.removeItem('user_name');
   }
