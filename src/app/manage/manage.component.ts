@@ -30,7 +30,7 @@ export class ManageComponent {
 
   ngOnInit(): void {
     // 有登录用户
-    if (this.userId) {
+    if (this.userId===-1) {
       this.page = [];
       this.setBwicList();
     } else {
@@ -90,31 +90,8 @@ export class ManageComponent {
     this.currentBwic = this.bwicList.find(bwic => bwic.bwicId === bwicId) || this.currentBwic;
   }
 
-  // update by bid record
-  updateBwicBid(updatedBwic: BwicInfo): void {
-    this.bwicService.updateBwicBid(updatedBwic).subscribe(bwicListFromResponse => {
-      //用户余额不够的情况
-      if (bwicListFromResponse.code === -102) {
-        toastr.error('你的余额不足，无法申购这个债券！');
-      } else {
-        this.setBwicList(this.currentFilterType);
-      }
-    })
-  }
-
-  addBwicBid(addedBwic: BwicInfo): void {
-    this.bwicService.updateBwicBid(addedBwic).subscribe(bwicListFromResponse => {
-      //用户余额不够的情况
-      if (bwicListFromResponse.code === -102) {
-        toastr.error('你的余额不足，无法申购这个债券！');
-      } else {
-        this.setBwicList(this.currentFilterType);
-      }
-    })
-  }
-
-  cancelBwicBid(): void {
-    this.bwicService.cancelBwic(this.currentBwic.bwicId).subscribe(bwicListFromResponse => {
+  deleteBwicBid(): void {
+    this.bwicService.deleteBwic(this.currentBwic.bwicId).subscribe(bwicListFromResponse => {
       if (bwicListFromResponse) {
         this.setBwicList(this.currentFilterType);
       }
@@ -126,7 +103,7 @@ export class ManageComponent {
     this.bwicService.modifyBwicBid(modifydBwic).subscribe(bwicListFromResponse => {
       //用户余额不够的情况
       if (bwicListFromResponse.code === -102) {
-        toastr.error('你的余额不足，无法申购这个债券！');
+        toastr.error('修改失败');
       } else {
         this.setBwicList(this.currentFilterType);
       }

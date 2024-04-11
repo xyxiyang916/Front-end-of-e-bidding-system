@@ -36,5 +36,10 @@ export class ModifyBwicBidRequest {
     price = 0;
     dueDate = new Date();
     marketValue = 0;
-    overDue = true;
+    clientId = 0;
+}
+
+export class DeleteBwicBidRequest {
+    bwicId = 0;
+    clientId = 0;
 }

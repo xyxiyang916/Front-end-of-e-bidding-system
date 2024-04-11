@@ -24,6 +24,7 @@ import { MarketSituationComponent } from './market-situation/market-situation.co
 import { TestComponent } from './test/test.component';
 import { ManageComponent } from './manage/manage.component';
 import { BwicBidModifyComponent } from './bwic-bid-modify/bwic-bid-modify.component';
+import { BwicBidDeleteComponent } from './bwic-bid-delete/bwic-bid-delete.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { BwicBidModifyComponent } from './bwic-bid-modify/bwic-bid-modify.compon
     MarketSituationComponent,
     TestComponent,
     ManageComponent,
-    BwicBidModifyComponent
+    BwicBidModifyComponent,
+    BwicBidDeleteComponent
   ],
   imports: [
     BrowserModule,

@@ -15,41 +15,35 @@
                         <div class="form-group row">
                             <label for="Cusip" class="col-sm-4 col-form-label">Cusip</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="Cusip" placeholder="" value="{{bwicFormData.cusip}}" disabled>
+                                <input type="text" class="form-control" id="Cusip" placeholder="" name="cusip" [(ngModel)]="bwicFormData.cusip">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="dueDate" class="col-sm-4 col-form-label">Due Date</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="dueDate" placeholder="" value="{{bwicFormData.dueDate}}" disabled>
+                                <input type="text" class="form-control" id="dueDate" placeholder="" name="dueDate" [(ngModel)]="bwicFormData.dueDate">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="position" class="col-sm-4 col-form-label">Position</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="position" placeholder="" value="{{bwicFormData.position}}" disabled>
+                                <input type="text" class="form-control" id="position" placeholder="" name="position" [(ngModel)]="bwicFormData.position">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="price" class="col-sm-4 col-form-label">Market Price($)</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="price" placeholder="" value="{{bwicFormData.price}}" disabled>
+                                <input type="text" class="form-control" id="price" placeholder="" name="price" [(ngModel)]="bwicFormData.price">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="marketValue" class="col-sm-4 col-form-label">Starting Market Value($)</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="marketValue"
-                                    placeholder="" value="{{bwicFormData.marketValue}}" disabled>
+                                    placeholder="" name="MarketValue" [(ngModel)]="bwicFormData.marketValue">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="bidMarketValue" class="col-sm-4 col-form-label">My Bit Market Value($)</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="bidMarketValue"
-                                    placeholder="" name="bidMarketValue" [(ngModel)]="bwicFormData.bidMarketValue">
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">

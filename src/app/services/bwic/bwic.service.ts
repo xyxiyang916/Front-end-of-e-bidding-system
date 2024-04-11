@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { Constants } from 'src/app/consts/constants';
-import { BwicInfo, BwicInfoResponse, CancelBwicBidRequest, UpdateBwicBidRequest, ModifyBwicBidRequest } from 'src/app/models/bwic';
+import { BwicInfo, BwicInfoResponse, CancelBwicBidRequest, UpdateBwicBidRequest, ModifyBwicBidRequest, DeleteBwicBidRequest } from 'src/app/models/bwic';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -90,13 +90,13 @@ export class BwicService {
   //This is used for bwic bid modify and add
   public modifyBwicBid(modifydBwic: BwicInfo): Observable<BwicInfoResponse>{
     const modifyBwicBidRequest: ModifyBwicBidRequest = {
+      'clientId': this.userId,
       'bwicId': modifydBwic.bwicId,
       'cusip': modifydBwic.cusip,
       'position':modifydBwic.position,
       'price':modifydBwic.price,
       'dueDate':modifydBwic.dueDate,
       'marketValue':modifydBwic.marketValue,
-      'overDue':modifydBwic.overDue
     }
 
     return this.http.post<BwicInfoResponse>(Constants.apiConfig.modifyBwicUri, modifyBwicBidRequest).pipe(
@@ -111,5 +111,25 @@ export class BwicService {
         throw new Error('modify BWIC error!');
       })
     )
+  }
+
+  public deleteBwic(bwicId: number): Observable<BwicInfo[]> {
+    const deleteBwicBidRequest: DeleteBwicBidRequest = {
+      'bwicId': bwicId,
+      'clientId': this.userId
+    }
+
+    return this.http.post<BwicInfoResponse>(Constants.apiConfig.deleteBwicUri, deleteBwicBidRequest).pipe(
+      map(response => {
+        if(response.code === 0) {
+          return response.data;
+        } else {
+          throw new Error('delete BWIC error!');
+        }
+      }),
+      catchError(error => {
+        throw new Error('delete BWIC error!');
+      })
+    );
   }
 }
