@@ -34,7 +34,7 @@ export class ModifyBwicBidRequest {
     cusip = '';
     position = 0;
     price = 0;
-    dueDate = new Date();
+    dueDate = "";
     marketValue = 0;
     clientId = 0;
 }
@@ -48,7 +48,7 @@ export class CreateBwicBidRequest {
     cusip = '';
     position = 0;
     price = 0;
-    dueDate = new Date();
+    dueDate = "";
     marketValue = 0;
     clientId = 0;
 }

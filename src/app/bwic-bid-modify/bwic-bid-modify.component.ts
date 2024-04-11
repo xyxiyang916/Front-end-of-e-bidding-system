@@ -19,4 +19,8 @@ export class BwicBidModifyComponent {
   modifyBwicBid(): void {
     this.modifyBwicBidNotify.emit(this.bwicFormData);
   }
+  // 在组件类中定义一个方法来处理输入值的变化
+  onDueDateChange(value: string) {
+    this.bwicFormData.dueDate = new Date(value);
+  }
 }

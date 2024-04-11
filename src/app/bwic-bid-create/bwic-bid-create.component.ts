@@ -15,12 +15,8 @@ export class BwicBidCreateComponent {
   createBwicBid(): void {
     this.createBwicBidNotify.emit(this.bwicFormData);
   }
-  // 在组件类中定义一个用于保存值的属性
-  dueDateValue: string = "";
-
   // 在组件类中定义一个方法来处理输入值的变化
   onDueDateChange(value: string) {
     this.bwicFormData.dueDate = new Date(value);
-    this.bwicFormData.dueDate.setHours(0, 0, 0, 0);
   }
 }
