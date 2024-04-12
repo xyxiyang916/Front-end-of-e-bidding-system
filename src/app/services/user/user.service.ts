@@ -26,14 +26,17 @@ export class UserService {
     );
   }
 
+  //登录
   public login(username: string, password: string): Observable<any> {
-    const body={
-      "username":username,
-      "password":password
-    }
+    const body = {
+      "username": username,
+      "password": password
+    };
+
     return this.http.post<any>(Constants.apiConfig.login, body).pipe(
       map(response => {
-        if (response.code === 0 || response.code === -101) {
+        // 收到返回：0成功 -101用户不存在空的返回
+        if (response.code === "0") {
           return response;
         } else {
           throw new Error('Get UserInfo error');
@@ -45,14 +48,37 @@ export class UserService {
     );
   }
 
+
+  //test
+  public test(username: string, password: string): Observable<any> {
+    const body = {
+      "username": username,
+      "password": password
+    }
+    return this.http.post<any>(Constants.apiConfig.logintest.replace('{var1}', username).replace('{var2}', password), null).pipe(
+      map(response => {
+        if (response.code === "0") {
+          return response;
+        } else {
+          throw new Error('Get UserInfo error');
+        }
+      }),
+      catchError(error => {
+        throw new Error('Get UserInfo error');
+      })
+    );
+  }
+
+  //注册
   public postUserInfo(number: string, password: string): Observable<any> {
-    const body={
-      "number":number,
-      "password":password
+    const body = {
+      "number": number,
+      "password": password
     }
     return this.http.post<any>(Constants.apiConfig.registerUri, body).pipe(
       map(response => {
-        if (response.code === 0 || response.code === 1 || response.code === -101) {
+        // 收到返回：0成功 -101用户不存在空的返回
+        if (response.code === "0") {
           return response;
         } else {
           throw new Error('Get UserInfo error');
@@ -64,14 +90,16 @@ export class UserService {
     );
   }
 
+  // 忘记密码
   public forget(number: string, password: string): Observable<any> {
-    const body={
-      "number":number,
-      "password":password
+    const body = {
+      "number": number,
+      "password": password
     }
     return this.http.post<any>(Constants.apiConfig.registerUri, body).pipe(
       map(response => {
-        if (response.code === 0 || response.code === 1 || response.code === -101) {
+        // 收到返回：0成功 -101用户不存在空的返回
+        if (response.code === "0") {
           return response;
         } else {
           throw new Error('Get UserInfo error');
@@ -99,7 +127,7 @@ export class UserService {
     const userInfo: UserInfo = {
       id: Number(window.localStorage.getItem('user_id')),
       name: window.localStorage.getItem('user_name') + '',
-      assetValue:0
+      assetValue: 0
     };
     return userInfo;
   }

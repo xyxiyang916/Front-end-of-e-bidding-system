@@ -30,7 +30,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li *ngIf="userGroup!==-1" class="nav-item">
                     <a [routerLink]="['/dashboard/bwicList']" [class]="currentMenu === 'bwicList'? 'nav-link active' : 'nav-link'" (click)="updateMenuStatus('bwicList')">
                         <i class="nav-icon fas fa-th"></i>
                         <p>

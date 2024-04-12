@@ -19,7 +19,6 @@ export class RegisterComponent {
   ) { }
   // 使用 FormBuilder 创建一个登录表单，并将其赋值给 loginForm 变量。
   registerForm = this.formBuilder.group({
-    number: '',
     username: '',
     password: '',
     confirm_password: '',
@@ -30,16 +29,15 @@ export class RegisterComponent {
     if (this.registerForm.invalid) {
       return;
     }
-    const number = this.registerForm.controls['number'].value;
     const username = this.registerForm.controls['username'].value;
     const password = this.registerForm.controls['password'].value;
     const confirm_password = this.registerForm.controls['confirm_password'].value;
     // window.alert('username:' + username + ' password:' + password);
-    if (number?.trim() && password?.trim() && password.length > 7 && confirm_password === password) {
+    if (username?.trim() && password?.trim() && password.length > 7 && confirm_password === password) {
       //先清空localStorage里面的user缓存
       this.userService.clearUserFromLocalStorage();
       //请求后台获取登录user数据
-      this.userService.postUserInfo(number, password).subscribe(userInfoResponse => {
+      this.userService.postUserInfo(username, password).subscribe(userInfoResponse => {
         if (userInfoResponse.code === -101) {
           //显示错误提示框
           toastr.error('注册失败');

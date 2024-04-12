@@ -10,6 +10,7 @@ import { Router } from '@angular/router'
 export class NavBarComponent {
 
   constructor(private userService: UserService, private route: Router) {}
+  username = this.userService.getLoggedUser().name;
 
   logout() {
     this.userService.clearUserFromLocalStorage();

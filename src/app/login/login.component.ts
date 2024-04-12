@@ -40,7 +40,8 @@ export class LoginComponent {
       this.userService.clearUserFromLocalStorage();
       //请求后台获取登录user数据
       this.userService.login(username, password).subscribe(userInfoResponse => {
-        if (userInfoResponse.code === 0) {
+        if (userInfoResponse.code === "0") {
+          //成功登录
           //if (userInfoResponse.code === -101) {
           //将获取到的user数据添加到localStorage里面
           this.userService.addUserToLocalStorage(userInfoResponse.data);
@@ -49,7 +50,7 @@ export class LoginComponent {
           this.route.navigate(['/dashboard']);
         } else {
           // 根据不同状态码输出内容
-
+          // -101没有用户信息
           toastr.error('登陆失败');
         }
       });
