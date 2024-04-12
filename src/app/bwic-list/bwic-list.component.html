@@ -1,5 +1,84 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body table-responsive p-0">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Cusip</th>
+                                        <th>Due Date</th>
+                                        <th>Position</th>
+                                        <th>Market Price($)</th>
+                                        <th>Starting Market Value($)</th>
+                                        <th>NO. of Bids</th>
+                                        <th>My Ranking</th>
+                                        <th>My Bid Market Value($)</th>
+                                        <th style="width: 260px">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ 1 }}</td>
+                                        <td>{{ bwicList[0].cusip }}</td>
+                                        <td>{{ bwicList[0].dueDate }}</td>
+                                        <td>{{ bwicList[0].position }}</td>
+                                        <td>{{ bwicList[0].price }}</td>
+                                        <td>{{ bwicList[0].marketValue }}</td>
+                                        <td *ngIf="bwicList[0].totalBids">{{ bwicList[0].totalBids }}</td>
+                                        <td *ngIf="!bwicList[0].totalBids">-</td>
+                                        <td *ngIf="bwicList[0].bidRank">{{ bwicList[0].bidRank }}</td>
+                                        <td *ngIf="!bwicList[0].bidRank">-</td>
+                                        <td *ngIf="bwicList[0].bidMarketValue">{{ bwicList[0].bidMarketValue }}</td>
+                                        <td *ngIf="!bwicList[0].bidMarketValue">-</td>
+                                        <td>
+                                            <!--Update Link-->
+                                            <span *ngIf="!bwicList[0].overDue && bwicList[0].bidMarketValue">
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-update"
+                                                    (click)="setCurrentBwic(bwicList[0].bwicId)">Update</a>&nbsp;
+                                            </span>
+                                            <!--Cancel Link-->
+                                            <span *ngIf="!bwicList[0].overDue && bwicList[0].bidMarketValue">
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-cancel"
+                                                    (click)="setCurrentBwic(bwicList[0].bwicId)">Cancel</a>&nbsp;
+                                            </span>
+                                            <!--Bid Link-->
+                                            <span *ngIf="!bwicList[0].overDue && !bwicList[0].bidMarketValue">
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-add"
+                                                    (click)="setCurrentBwic(bwicList[0].bwicId)">Bid</a>&nbsp;
+                                            </span>
+                                            <!--View bids Link-->
+                                            <span *ngIf="!bwicList[0].overDue && bwicList[0].totalBids > 0">
+                                                &nbsp;<a href="" data-toggle="modal" data-target="#modal-viewBid">View
+                                                    Bids</a>&nbsp;
+                                            </span>
+                                            <!--Winner label-->
+                                            <span *ngIf="bwicList[0].overDue && bwicList[0].winner"
+                                                class="badge bg-success">&nbsp;Winner: {{ bwicList[0].winner }}&nbsp;</span>
+                                            <span *ngIf="bwicList[0].overDue && !bwicList[0].winner" class="badge bg-danger">&nbsp;No
+                                                Winner&nbsp;</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="bwicList.length === 0">
+                                    <tr>
+                                        <td colspan="10">There's no BWIC Records currently ~</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <app-bwic-list-filter (filterNotify)="setBwicList($event)"></app-bwic-list-filter>
 
     <!-- Main content -->
@@ -22,6 +101,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             <table class="table">

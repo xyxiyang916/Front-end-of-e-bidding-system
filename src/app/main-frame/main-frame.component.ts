@@ -17,7 +17,7 @@ export class MainFrameComponent {
 
   ngOnInit(): void {
     // 有登录用户
-    if (this.userId !== -1) {
+    if (this.userId !== -1 && this.userId !== 1) {
       // 否则要求登录
       this.route.navigate(['/login']);
     }

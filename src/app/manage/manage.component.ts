@@ -16,6 +16,7 @@ export class ManageComponent {
   currentBwic: BwicInfo = new BwicInfo();
   // 获取用户信息
   private userId = this.userService.getLoggedUser().id;
+  private num=window.localStorage.getItem('num') || '1'
   currentFilterType: string = 'All';
   page: number[] = [];
   pageNum = 0;
@@ -64,7 +65,7 @@ export class ManageComponent {
     if (filterType === 'Ended') {
       // 获取当前结束的
       // 先获取所有的再筛选
-      this.bwicService.getBwicList(this.userId).subscribe(bwicListFromResponse => {
+      this.bwicService.getBwicList(this.userId, this.num).subscribe(bwicListFromResponse => {
         // 根据搜索内容进行筛选
         if (this.searchText !== '') {
           bwicListFromResponse = bwicListFromResponse.filter(item => item.cusip.includes(this.searchText));
@@ -74,7 +75,7 @@ export class ManageComponent {
       });
       // 根据类型获取所有或者我的所有
     } else {
-      this.bwicService.getBwicList(this.userId, filterType).subscribe(bwicListFromResponse => {
+      this.bwicService.getBwicList(this.userId, this.num, filterType).subscribe(bwicListFromResponse => {
         // 根据搜索内容进行筛选
         if (this.searchText !== '') {
           bwicListFromResponse = bwicListFromResponse.filter(item => item.cusip.includes(this.searchText));

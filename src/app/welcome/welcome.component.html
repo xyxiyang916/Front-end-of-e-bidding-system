@@ -1,3 +1,62 @@
 <div class="content-wrapper">
     <h1 class="welcomeH1">{{welcomeMessage}}</h1>
+    <div class="container">
+
+        <div *ngIf="userId!=-1" class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title m-0">一号拍卖场</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">拍卖场描述</h6>
+
+                        <p class="card-text"></p>
+                        <a href="dashboard/bwicList" class="btn btn-primary" (click)="setnum(1)">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title m-0">二号拍卖场</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">拍卖场描述</h6>
+
+                        <p class="card-text"></p>
+                        <a href="dashboard/manage" class="btn btn-primary" (click)="setnum(2)">Go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="userId===-1" class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title m-0">一号拍卖场</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">拍卖场描述 管理员通道</h6>
+
+                        <p class="card-text"></p>
+                        <a href="dashboard/manage" class="btn btn-primary" (click)="setnum(1)">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title m-0">二号拍卖场 管理员通道</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">拍卖场描述</h6>
+
+                        <p class="card-text"></p>
+                        <a href="dashboard/bwicList" class="btn btn-primary" (click)="setnum(2)">Go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

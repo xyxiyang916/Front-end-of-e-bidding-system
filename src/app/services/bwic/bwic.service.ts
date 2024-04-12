@@ -21,17 +21,48 @@ export class BwicService {
     this.userId = userService.getLoggedUser().id;
   }
 
-  public getBwicList(userId: number, filterType: string = 'All'): Observable<BwicInfo[]> {
+  //旧版本
+  public getBwicListold(userId: number, filterType: string = 'All'): Observable<BwicInfo[]> {
     let uri: string = '';
     if (filterType === 'All') {
       // 获取所有
-      uri = Constants.apiConfig.allBwicListUri.replace('{var1}', userId + '')
+      uri = Constants.apiConfig.allBwicListUriold.replace('{var1}', userId + '')
     } else if (filterType === 'My') {
       // 获取我的所有
-      uri = Constants.apiConfig.myInvolvedBwicListUri.replace('{var1}', userId + '')
+      uri = Constants.apiConfig.myInvolvedBwicListUriold.replace('{var1}', userId + '')
     }
 
     return this.http.get<BwicInfoResponse>(uri).pipe(
+      map(response => {
+        if (response.code === 0) {
+          return response.data;
+        } else {
+          throw new Error('Get BWIC list error!');
+        }
+      }),
+      catchError(error => {
+        console.error("error: " + error);
+        throw new Error('Get BWIC list error!');
+      })
+    );
+  }
+
+  public getBwicList(userId: number, num: string, filterType: string = 'All'): Observable<BwicInfo[]> {
+    let uri: string = '';
+    const body = {
+      "num": num || "1",
+      "id": userId
+    }
+    console.log(num)
+    if (filterType === 'All') {
+      // 获取所有
+      uri = Constants.apiConfig.allBwicListUri
+    } else if (filterType === 'My') {
+      // 获取我的所有
+      uri = Constants.apiConfig.myInvolvedBwicListUri
+    }
+
+    return this.http.post<any>(uri,body).pipe(
       map(response => {
         if (response.code === 0) {
           return response.data;
