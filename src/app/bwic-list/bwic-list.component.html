@@ -25,42 +25,43 @@
                                 <tbody>
                                     <tr>
                                         <td>{{ 1 }}</td>
-                                        <td>{{ bwicList[0].cusip }}</td>
-                                        <td>{{ bwicList[0].dueDate }}</td>
-                                        <td>{{ bwicList[0].position }}</td>
-                                        <td>{{ bwicList[0].price }}</td>
-                                        <td>{{ bwicList[0].marketValue }}</td>
-                                        <td *ngIf="bwicList[0].totalBids">{{ bwicList[0].totalBids }}</td>
-                                        <td *ngIf="!bwicList[0].totalBids">-</td>
-                                        <td *ngIf="bwicList[0].bidRank">{{ bwicList[0].bidRank }}</td>
-                                        <td *ngIf="!bwicList[0].bidRank">-</td>
-                                        <td *ngIf="bwicList[0].bidMarketValue">{{ bwicList[0].bidMarketValue }}</td>
-                                        <td *ngIf="!bwicList[0].bidMarketValue">-</td>
+                                        <td>{{ nowBwic.cusip }}</td>
+                                        <td>{{ nowBwic.dueDate }}</td>
+                                        <td>{{ nowBwic.position }}</td>
+                                        <td>{{ nowBwic.price }}</td>
+                                        <td>{{ nowBwic.marketValue }}</td>
+                                        <td *ngIf="nowBwic.totalBids">{{ nowBwic.totalBids }}</td>
+                                        <td *ngIf="!nowBwic.totalBids">-</td>
+                                        <td *ngIf="nowBwic.bidRank">{{ nowBwic.bidRank }}</td>
+                                        <td *ngIf="!nowBwic.bidRank">-</td>
+                                        <td *ngIf="nowBwic.bidMarketValue">{{ nowBwic.bidMarketValue }}</td>
+                                        <td *ngIf="!nowBwic.bidMarketValue">-</td>
                                         <td>
                                             <!--Update Link-->
-                                            <span *ngIf="!bwicList[0].overDue && bwicList[0].bidMarketValue">
+                                            <span *ngIf="!nowBwic.overDue && nowBwic.bidMarketValue">
                                                 &nbsp;<a href="" data-toggle="modal" data-target="#modal-update"
-                                                    (click)="setCurrentBwic(bwicList[0].bwicId)">Update</a>&nbsp;
+                                                    (click)="setCurrentBwic(nowBwic.bwicId)">Update</a>&nbsp;
                                             </span>
                                             <!--Cancel Link-->
-                                            <span *ngIf="!bwicList[0].overDue && bwicList[0].bidMarketValue">
+                                            <span *ngIf="!nowBwic.overDue && nowBwic.bidMarketValue">
                                                 &nbsp;<a href="" data-toggle="modal" data-target="#modal-cancel"
-                                                    (click)="setCurrentBwic(bwicList[0].bwicId)">Cancel</a>&nbsp;
+                                                    (click)="setCurrentBwic(nowBwic.bwicId)">Cancel</a>&nbsp;
                                             </span>
                                             <!--Bid Link-->
-                                            <span *ngIf="!bwicList[0].overDue && !bwicList[0].bidMarketValue">
+                                            <span *ngIf="!nowBwic.overDue && !nowBwic.bidMarketValue">
                                                 &nbsp;<a href="" data-toggle="modal" data-target="#modal-add"
-                                                    (click)="setCurrentBwic(bwicList[0].bwicId)">Bid</a>&nbsp;
+                                                    (click)="setCurrentBwic(nowBwic.bwicId)">Bid</a>&nbsp;
                                             </span>
                                             <!--View bids Link-->
-                                            <span *ngIf="!bwicList[0].overDue && bwicList[0].totalBids > 0">
+                                            <span *ngIf="!nowBwic.overDue && nowBwic.totalBids > 0">
                                                 &nbsp;<a href="" data-toggle="modal" data-target="#modal-viewBid">View
                                                     Bids</a>&nbsp;
                                             </span>
                                             <!--Winner label-->
-                                            <span *ngIf="bwicList[0].overDue && bwicList[0].winner"
-                                                class="badge bg-success">&nbsp;Winner: {{ bwicList[0].winner }}&nbsp;</span>
-                                            <span *ngIf="bwicList[0].overDue && !bwicList[0].winner" class="badge bg-danger">&nbsp;No
+                                            <span *ngIf="nowBwic.overDue && nowBwic.winner"
+                                                class="badge bg-success">&nbsp;Winner: {{ nowBwic.winner }}&nbsp;</span>
+                                            <span *ngIf="nowBwic.overDue && !nowBwic.winner"
+                                                class="badge bg-danger">&nbsp;No
                                                 Winner&nbsp;</span>
                                         </td>
                                     </tr>
@@ -72,13 +73,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <app-bwic-list-filter (filterNotify)="setBwicList($event)"></app-bwic-list-filter>
 
     <!-- Main content -->
@@ -101,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             <table class="table">
@@ -170,16 +171,33 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
+
+                        <!-- /.card-body -->
                         <div class="card-footer clearfix">
+                            <div class="row float-left">
+                                <div class="col-4">
+                                    <a href="/dashboard/welcome" class="btn btn-primary btn-block">Main Page</a>
+                                </div>
+                                <div class="col-4">
+                                    <a href="" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-create">Entrust</a>
+                                </div>
+                                <div class="col-4">
+                                    <a href="/profile" class="btn btn-primary btn-block">Profile</a>
+                                </div>
+                            </div>
+                            
+                            
                             <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="" data-toggle="modal" (click)="changePage(page[0])">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link" href="" data-toggle="modal"
+                                        (click)="changePage(page[0])">&laquo;</a></li>
                                 <tbody *ngFor="let p of page; let i = index">
                                     <tr>
                                         <li class="page-item"><a class="page-link" data-toggle="modal" href=""
                                                 (click)="changePage(p)">{{p}}</a></li>
                                     </tr>
                                 </tbody>
-                                <li class="page-item"><a class="page-link" href="" data-toggle="modal" (click)="changePage(page[page.length-1])">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link" href="" data-toggle="modal"
+                                        (click)="changePage(page[page.length-1])">&raquo;</a></li>
                             </ul>
                         </div>
                     </div>
@@ -200,3 +218,5 @@
     (updateBwicBidNotify)="updateBwicBid($event)"></app-bwic-bid-update>
 <app-bwic-bid-cancel [currentBwicIdInput]="currentBwic.bwicId"
     (cancelBwicBidNotify)="cancelBwicBid()"></app-bwic-bid-cancel>
+    <app-bwic-bid-create
+        (createBwicBidNotify)="createBwicBid($event)"></app-bwic-bid-create>

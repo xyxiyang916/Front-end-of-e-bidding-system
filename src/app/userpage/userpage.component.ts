@@ -27,20 +27,18 @@ export class UserpageComponent {
   userGroup = "普通用户"
   ngOnInit(): void {
     // 有登录用户
-    if (this.userId === -1) {
+    if (this.userId === -1 || this.userId===1) {
     } else {
       // 否则要求登录
       this.route.navigate(['/login']);
     }
-    this.bwicService.getBwicList(this.userId, "My").subscribe(bwicListFromResponse => {
+    this.bwicService.getBwicListold(this.userId, "My").subscribe(bwicListFromResponse => {
       // 根据搜索内容进行筛选
       this.bwicList = bwicListFromResponse.slice(10 * this.pageNum, 10 * (this.pageNum + 1));
       this.cusipNum = this.bwicList.length;
       this.creatPagination(bwicListFromResponse.filter(bwic => bwic.overDue).length);
     });
     this.userService.getUserInfo(this.userId).subscribe(userInfoResponse => {
-      console.log(1)
-      console.log(userInfoResponse)
       this.money = userInfoResponse.data.assetValue;
     })
   }

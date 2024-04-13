@@ -16,9 +16,10 @@ export class BwicListComponent {
 
   bwicList: BwicInfo[] = [];
   currentBwic: BwicInfo = new BwicInfo();
+  nowBwic: BwicInfo = new BwicInfo();
   // 获取用户信息
   private userId = this.userService.getLoggedUser().id;
-  private num=window.localStorage.getItem('num') || '1'
+  private num = window.localStorage.getItem('num') || '1'
   currentFilterType: string = 'All';
   page: number[] = [];
   pageNum = 0;
@@ -68,22 +69,30 @@ export class BwicListComponent {
       // 获取当前结束的
       // 先获取所有的再筛选
       this.bwicService.getBwicList(this.userId, this.num).subscribe(bwicListFromResponse => {
+        //当前拍卖
+        this.nowBwic = bwicListFromResponse[0]
+        bwicListFromResponse = bwicListFromResponse.slice(1, bwicListFromResponse.length)
         // 根据搜索内容进行筛选
         if (this.searchText !== '') {
           bwicListFromResponse = bwicListFromResponse.filter(item => item.cusip.includes(this.searchText));
         }
         this.bwicList = bwicListFromResponse.filter(bwic => bwic.overDue).slice(10 * this.pageNum, 10 * (this.pageNum + 1));
         this.creatPagination(bwicListFromResponse.filter(bwic => bwic.overDue).length);
+
       });
       // 根据类型获取所有或者我的所有
     } else {
       this.bwicService.getBwicList(this.userId, this.num, filterType).subscribe(bwicListFromResponse => {
+        //当前拍卖
+        this.nowBwic = bwicListFromResponse[0]
+        bwicListFromResponse = bwicListFromResponse.slice(1, bwicListFromResponse.length)
         // 根据搜索内容进行筛选
         if (this.searchText !== '') {
           bwicListFromResponse = bwicListFromResponse.filter(item => item.cusip.includes(this.searchText));
         }
         this.bwicList = bwicListFromResponse.slice(10 * this.pageNum, 10 * (this.pageNum + 1));
         this.creatPagination(bwicListFromResponse.length);
+
       });
     }
     this.currentFilterType = filterType;
@@ -119,6 +128,18 @@ export class BwicListComponent {
   cancelBwicBid(): void {
     this.bwicService.cancelBwic(this.currentBwic.bwicId).subscribe(bwicListFromResponse => {
       if (bwicListFromResponse) {
+        this.setBwicList(this.currentFilterType);
+      }
+    })
+  }
+
+  // create by bid record
+  createBwicBid(createdBwic: BwicInfo): void {
+    this.bwicService.createBwicBid(createdBwic).subscribe(bwicListFromResponse => {
+      //用户余额不够的情况
+      if (bwicListFromResponse.code === -102) {
+        toastr.error('修改失败');
+      } else {
         this.setBwicList(this.currentFilterType);
       }
     })

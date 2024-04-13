@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
   //返回Observable<UserInfoResponse>
   public getUserInfo(userId: number): Observable<UserInfoResponse> {
-    return this.http.get<UserInfoResponse>(Constants.apiConfig.loginUri.replace('{var1}', userId.toString())).pipe(
+    return this.http.get<UserInfoResponse>(Constants.apiConfig.userInfo.replace('{var1}', userId.toString())).pipe(
       map(response => {
         if (response.code === 0 || response.code === 0 || -101) {
           return response;

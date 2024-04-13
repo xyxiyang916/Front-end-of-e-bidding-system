@@ -13,7 +13,7 @@ export class WelcomeComponent {
     private userService: UserService,
   ) { }
 
-  welcomeMessage: string = 'Welcome to e Bidding System, You can view BWIC list by clicking "View BWIC" menu on the left.'
+  welcomeMessage: string = 'Welcome to e Bidding System.'
   public setnum(num: number): void {
     window.localStorage.setItem('num', num + "");
   }

@@ -15,5 +15,7 @@ export const Constants = {
         "modifyBwicUri": domainUri + '/bwic/modify',
         "deleteBwicUri": domainUri + '/bwic/delete',
         "createBwicUri": domainUri + '/bwic/create',
+
+        "userInfo": domainUri + '/client/get/{var1}',
     }
 }
